@@ -11,7 +11,7 @@ classdef robotarm
     function this = robotarm()
         % constructor should import the urdf, setup the serial comms, and
         % set the robot to home position
-    this.lobot = importrobot("robot_arm_urdf.urdf", DataFormat="row");
+    this.lobot = importrobot("robot_arm_urdf\urdf\robot_arm_urdf.urdf", DataFormat="row");
     show(this.lobot);    
     this.device=serialport("COM9",9600);
     writeline(this.device,string(0));    
