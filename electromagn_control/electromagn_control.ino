@@ -1,4 +1,4 @@
- const int crtl_pin=13;
+ const int crtl_pin=12;
  int value =0;
 
 void setup() {
