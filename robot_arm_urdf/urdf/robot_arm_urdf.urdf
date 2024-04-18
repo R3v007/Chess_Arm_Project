@@ -216,7 +216,7 @@
   <link  name="extrusion">
     <inertial>
       <origin
-        xyz="-0.020617 -0.02628 -0.0022471"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.014348" />
@@ -234,7 +234,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robot_arm_urdf/meshes/item_37003_profile-5-20x20-natural-_350_high.STL" scale="0.001 0.001 0.001"/>
+          filename="package://robot_arm_urdf/meshes/item_37003_profile-5-20x20-natural-_350_high.STL" />
       </geometry>
       <material
         name="">
@@ -248,7 +248,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robot_arm_urdf/meshes/item_37003_profile-5-20x20-natural-_350_high.STL" scale="0.001 0.001 0.001"/>
+          filename="package://robot_arm_urdf/meshes/item_37003_profile-5-20x20-natural-_350_high.STL" scale="0.001 0.001 0.001" />
       </geometry>
     </collision>
   </link>
@@ -497,11 +497,15 @@
   <joint name="Fixed_extrusion_frame"
     type="fixed">
     <origin
-      xyz="0.13 -0.1465 0.175"
-      rpy="1.57 0 0" />
+      xyz="0.13 -0.1465 0"
+      rpy="0 0 0" />
     <parent link="base_link" />
     <child link="extrusion" />
   </joint>
+
+
+
+
 
 
 </robot>
