@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="robot_arm_urdf">
+
+  <!--LINK DESCRIPTIONS-->
+  <!-- The Base Link -->
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="1.9255E-16 1.0408E-17 0.024"
+        rpy="0 0 0" />
+      <mass
+        value="0.24406" />
+      <inertia
+        ixx="0.0003634"
+        ixy="-1.7889E-18"
+        ixz="-5.3921E-22"
+        iyy="0.0003634"
+        iyz="1.8719E-21"
+        izz="0.00063308" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- L1 Link-->
+  <link name="L1">
+    <inertial>
+      <origin
+        xyz="2.7582E-16 -6.245E-16 0.02969"
+        rpy="0 0 0" />
+      <mass
+        value="0.31528" />
+      <inertia
+        ixx="0.00023458"
+        ixy="6.7763E-21"
+        ixz="-5.4289E-21"
+        iyy="0.00024605"
+        iyz="-2.4008E-21"
+        izz="0.0002559" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/L1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/L1.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!--Link L2-->
+  <link name="L2">
+    <inertial>
+      <origin
+        xyz="-0.034331 -2.3717E-10 0.053197"
+        rpy="0 0 0" />
+      <mass
+        value="0.035545" />
+      <inertia
+        ixx="1.1333E-05"
+        ixy="-9.0422E-14"
+        ixz="-7.5856E-08"
+        iyy="2.563E-05"
+        iyz="1.9783E-13"
+        izz="1.85E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/L2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/L2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!--Link L3-->
+  <link name="L3">
+    <inertial>
+      <origin
+        xyz="-0.0211 -0.047034 0.00011863"
+        rpy="0 0 0" />
+      <mass
+        value="0.084275" />
+      <inertia
+        ixx="1.7247E-05"
+        ixy="0"
+        ixz="6.2874E-21"
+        iyy="1.1839E-05"
+        iyz="9.7142E-09"
+        izz="2.1277E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/L3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/L3.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!--Link L4-->
+  <link  name="L4">
+    <inertial>
+      <origin
+        xyz="-0.020617 -0.02628 -0.0022471"
+        rpy="0 0 0" />
+      <mass
+        value="0.014348" />
+      <inertia
+        ixx="7.6235E-06"
+        ixy="4.5643E-09"
+        ixz="9.14E-19"
+        iyy="5.2517E-06"
+        iyz="-7.1145E-07"
+        izz="1.0725E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/latestholder.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.89804 0.89804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/latestholder.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <!--Link extrusion-->
+  <link  name="extrusion">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.014348" />
+      <inertia
+        ixx="7.6235E-06"
+        ixy="4.5643E-09"
+        ixz="9.14E-19"
+        iyy="5.2517E-06"
+        iyz="-7.1145E-07"
+        izz="1.0725E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/item_37003_profile-5-20x20-natural-_350_high.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.89804 0.89804 1" />
+      </material>
+    </visual>
+    <!--collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/item_37003_profile-5-20x20-natural-_350_high.STL" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision-->
+  </link>
+
+  <!--Chess Board-->
+  <link  name="Chess_board">
+     <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="7.6235E-06"
+        ixy="4.5643E-09"
+        ixz="9.14E-19"
+        iyy="5.2517E-06"
+        iyz="-7.1145E-07"
+        izz="1.0725E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/Body1.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.439 0.878 0.871 0" />
+      </material>
+    </visual>
+    <!--collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/Body1.STL" scale="0.0001 0.0001 0.0001" />
+      </geometry>
+    </collision-->
+  </link>
+
+
+
+  <!--Chess and Cam-->
+  <link  name="Chess_and_cam">
+     <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="7.6235E-06"
+        ixy="4.5643E-09"
+        ixz="9.14E-19"
+        iyy="5.2517E-06"
+        iyz="-7.1145E-07"
+        izz="1.0725E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/chessandcam.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.439 0.878 0.871 0" />
+      </material>
+    </visual>
+    <!--collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/chessandcam.STL" scale="0.0001 0.0001 0.0001" />
+      </geometry>
+    </collision-->
+  </link>
+
+
+  <!--Robot Frame-->
+  <link  name="Robot_frame">
+     <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="7.6235E-06"
+        ixy="4.5643E-09"
+        ixz="9.14E-19"
+        iyy="5.2517E-06"
+        iyz="-7.1145E-07"
+        izz="1.0725E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/robot_frame.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.439 0.878 0.871 0" />
+      </material>
+    </visual>
+    <!--collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_urdf/meshes/robot_frame.STL" scale="0.0001 0.0001 0.0001" />
+      </geometry>
+    </collision-->
+  </link>
+
+
+
+
+
+  <!--JOINT DESCRIPTIONS-->
+  <!--Joint J1-->
+  <joint  name="J1"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="L1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.309"
+      upper="1.309"
+      effort="300"
+      velocity="3" />
+  </joint>
+
+  <!--Joint J2-->  
+  <joint   name="J2"
+    type="revolute">
+    <origin
+      xyz="0.034415 0 0.064"
+      rpy="0 0 0" />
+    <parent
+      link="L1" />
+    <child
+      link="L2" />
+    <axis
+      xyz="-1 0 -0.00012534" />
+    <limit
+      lower="-0.2618"
+      upper="1.3963"
+      effort="300"
+      velocity="3" />
+  </joint>
+
+  <!--Joint J3-->  
+  <joint  name="J3"
+    type="revolute">
+    <origin
+      xyz="-0.0133 0 0.101"
+      rpy="0 0 0" />
+    <parent
+      link="L2" />
+    <child
+      link="L3" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-2.3562"
+      upper="0.5236"
+      effort="300"
+      velocity="3" />
+  </joint>
+
+  <!--Joint J4-->  
+  <joint  name="J4"
+    type="revolute">
+    <origin
+      xyz="-0.0005 -0.095 -0.012"
+      rpy="-3.14 -3.14 0" />
+    <parent
+      link="L3" />
+    <child
+      link="L4" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5708"
+      upper="1.74533"
+      effort="300"
+      velocity="3" />
+  </joint>
+
+  <!--Chess Board Joint Fixed-->
+  <joint name="Fixed_board"
+    type="fixed">
+    <origin
+      xyz="-0.1465 0 0"
+      rpy="1.5707 0 0" />
+    <parent link="base_link" />
+    <child link="Chess_board" />
+  </joint>
+
+
+  <!--Chess Board-Camera and Arm Joint Fixed-->
+  <joint name="Fixed_chess_cam_frame"
+    type="fixed">
+    <origin
+      xyz="-0.1465 0 0"
+      rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Chess_and_cam" />
+  </joint>
+
+
+  <!--Chess Board-Camera and Extrusion Joint Fixed-->
+  <joint name="Fixed_robot_frame"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 -1.57" />
+    <parent link="base_link" />
+    <child link="Robot_frame" />
+  </joint>
+
+
+  <!--Chess Board-Camera and Extrusion Joint Fixed-->
+  <joint name="Fixed_extrusion_frame"
+    type="fixed">
+    <origin
+      xyz="-0.1465 -0.13 0"
+      rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="extrusion" />
+  </joint>
+
+</robot>
