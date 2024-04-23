@@ -8,29 +8,20 @@ classdef robotarm
         arm
         chomp
         Joint_vals
-        temp
         home
-        final
-        finalstruct
-        optimpickconfig
-        timestamppick
-        solpickinfo
-        homex
-        homey
-        homez
         servo_ids
+        dh_params
     end
 
     methods
     
-    function this = robotarm()
+        function [this, record_joints] = robotarm()
         % constructor should import the urdf, setup the serial comms, and
         % set the robot to home position
         % import library xarm=py.importlib.import_module('xarm')
-        pyrun("import xarm");
-        this.home=[-90.0, 0.0, 0.0, 0.0];
+        % pyrun("import xarm");
         this.servo_ids=[2, 3, 4, 5];
-        this.arm=pyrun("arm = xarm.Controller('USB')","arm");
+        % this.arm=pyrun("arm = xarm.Controller('USB')","arm");
         this.lobot = importrobot("robot_arm_urdf/urdf/robot_arm_urdf.urdf", DataFormat="row");
         this.chomp = manipulatorCHOMP(this.lobot);
         disp("Robot Initialised");
@@ -38,18 +29,25 @@ classdef robotarm
 
         % find_angles=input("Do you want to find the current joint angles? 1/0 \n");
         % if(find_angles)
-        %     joints=this.getcurrentjointangles();
+        %     record_joints=this.getcurrentjointangles();
         %     disp("Current Joint angles are: ");
-        %     disp(joints);
-        %     wait("Press Enter to Continue");
+        %     disp(record_joints);
+        %     pause(2);
         % end
 
-        disp("Setting Robot to Home Position");
-        % pyrun("arm.setPosition([[2,-90.0],[3,0.0],[4,0.0],[5,0.0]],wait=1)");
-        isDone=this.setposition(this.home);
-        disp(isDone);
+        % SETTING THE DH PARAMS a alpha d theta
+        this.dh_params=[ -0.015 -pi/2 0.035 0;
+                         0.097  pi     0    0;
+                         0.097  pi     0    0;
+                         0      pi/2   0    0];
+        disp(this.dh_params);
         
-        %show(this.lobot);    
+
+        disp("Setting Robot to Home Position");
+        % pyrun("arm.setPosition([[2,-30.0],[3,0.0],[4,0.0],[5,0.0]],wait=1)");
+        % this.home=this.getcurrentjointangles(); 
+
+        this.home=[-90 0 0 0];
         %this.device=serialport("COM9",9600);
         %writeline(this.device,string(0));   
         
@@ -58,7 +56,7 @@ classdef robotarm
     function magnet(this,state)
         this.magnetstate=state;
         writeline(this.device,string(state));
-        disp(["magnetstate sent to the UNo: ", this.magnetstate]);
+        disp(["magnetstate sent to the Uno: ", this.magnetstate]);
     end
 
     function joints=getcurrentjointangles(this)      %get angle of each joint in radius
@@ -69,21 +67,21 @@ classdef robotarm
     end
 
     function status=set_to_home(this)
-        rad_home=rad2deg(this.home(:));
+        % rad_home=rad2deg(this.home(:));
         status=this.setposition(this.home);
     end
         
 
     function isDone=setposition(this,joints)
-         pyrun("arm.setPosition([[2,a],[3,b],[4,c],[5,d]],wait=1)", ...
-             a=joints(1),b=joints(2),c=joints(3),d=joints(4));
+         % pyrun("arm.setPosition([[2,a],[3,b],[4,c],[5,d]],wait=1)", ...
+             % a=joints(1),b=joints(2),c=joints(3),d=joints(4));
          isDone=true;
     end
     
     function joint_states=get_joint_states(this,coords) %get final angle of each joint in radians by ik
         temppose=trvec2tform(coords);
         ik = inverseKinematics( "RigidBodyTree",this.lobot);
-        weights = [0 0 0 1 1 1];
+        weights = [1 1 1 1 1 1];
         initialguess = homeConfiguration(this.lobot);
         [configSoln,~] = ik("L4",temppose,weights,initialguess);
         %show(this.lobot,this.finalstruct);
@@ -93,68 +91,83 @@ classdef robotarm
 
         % IF ON REV'S LAPTOP
         joint_states=configSoln;
-        next_Step=input("Do you want to Visualise the coordinates?1/0 \n");
-        switch next_Step
-            case 1
-                status=this.visualise_coords(coords);
-                disp(status)
-        end
+        this.visualise_coords(coords);
     end
+
+    function isOver=update_home(this)
+        % joints_rn=this.getcurrentjointangles();
+        disp("This is the current joints");
+        disp(joints_rn)
+        yn=input("Do you want to update? 1(yes)/0(no)");
+        if(yn)
+            this.home=joints_rn;
+            disp("Home Updated");
+            disp(this.home);
+            isOver=true;
+        end
+    end    
     
-    function [waypoints, timestamps]=dochomp(this,coords, time, timestep)
-        joints=this.getcurrentjointangles();
+    function [final_state,waypoints, timestamps]=dochomp(this,coords, time, timestep)
+        % curr_joints=this.getcurrentjointangles();
+        disp("Starting joint angles: ideally this should be home");
+        % disp(curr_joints)
+        disp("this is home angles:")
+        disp(this.home);
+        
+
         final_state=this.get_joint_states(coords);
+        disp("Final joint angles")
         disp(final_state)
-        [waypoints,timestamps,this.solpickinfo] = optimize(this.chomp,[joints ; final_state ], ... % Starting and ending robot joint configurations
+        [waypoints,timestamps,~] = optimize(this.chomp,[this.home ; final_state ], ... % Starting and ending robot joint configurations
                                                                  [0 time], ...                    % Two waypoint times, first at 0s and last at 2s
                                                                  timestep, ...                     % 0.1s time step
-                                                                 InitialTrajectoryFitType="minjerkpolytraj");
-        %show(chomp,optimpickconfig);
-        joints=rad2deg(final_state);
-        % joints=joints.*-1;
-        next_Step=input("Do you want to Visualise(0) or Run(1)? 1/0 \n");
-        switch next_Step
-            case 1
-                status=this.setposition(joints);
-                disp(status);
-            case 0
-                status=this.visualise_motion(waypoints);
-                disp(status)
-        end
+                                                                 InitialTrajectoryFitType="quinticpolytraj");
+        n=length(timestamps);
+        disp("the final angles that the chomp outputs:");
+        disp(waypoints(n,:));
+
    end
 
         % function to visualise the robot and the coordinates chosen. 
     function status=visualise_coords(this, coords)
-        close all;
-        show(this.lobot);
+        this.show_current_arm()
         hold on;
         plotTransforms(coords,eul2quat([0 0 0]),FrameSize=0.2);
         status=true;
     end
 
-    function status=visualise_motion(this, waypoints)
-        close all;
-        show(this.lobot);
+    function status=visualise_motion(this, joints)
+        % close all;
+        this.show_current_arm()
+        hold on;
+        hold on 
+        show(this.lobot, joints, PreservePlot=false);
+        % show(this.chomp, waypoints);
+        % title("Optimized Picking Trajectory")
+        % xlim([-1 1])
+        % ylim([-1 1])
+        % zlim([-0.2 1])
+        status=true;
+    end
+
+    function status=visualise_motion_chomp(this, waypoints)
+        % close all;
+        this.show_current_arm();
         hold on;
         show(this.chomp, waypoints);
         title("Optimized Picking Trajectory")
-        xlim([-1 1])
-        ylim([-1 1])
-        zlim([-0.2 1])
+        status=true;
+    end
+
+    function status=show_current_arm(this)
+        % joints=this.getcurrentjointangles;
+        joints=this.home;
+        show(this.lobot);
+        hold on;
+        show(this.lobot, joints, PreservePlot=false);
         status=true;
     end
     
-    %find homeposition x y z and joint angles
-    function changeonechessposition(this,pickx,picky,pickz,finalx,finaly,finalz)
-        %hometopick,magneton,picktohome,hometofinal,magnetoff,finaltohome
-        this.dochomp(pickx,picky,pickz);
-        this.magnet(1);
-        this.dochomp(0,0,0); %change this later
-        this.dochomp(finalx,finaly,finalz);
-        this.magnet(0);
-        this.dochomp(0,0,0);%change this later
-    end
-
     end
 
 end
